@@ -76,13 +76,23 @@ function renderTasks() {
     checkbox.checked = task.completed;
 
     
+    const taskContent = document.createElement("div");
+    taskContent.className = "task-content";
+
     const taskName = document.createElement("span");
     taskName.className = "task-name";
     taskName.textContent = task.name;
+    taskContent.appendChild(taskName);
 
     
     if (task.completed) {
       taskName.classList.add("completed");
+      if (task.completedAt) {
+        const timeSpan = document.createElement("span");
+        timeSpan.className = "completed-time";
+        timeSpan.textContent = "Completed on: " + task.completedAt;
+        taskContent.appendChild(timeSpan);
+      }
     }
 
    
@@ -100,7 +110,7 @@ function renderTasks() {
     });
 
     li.appendChild(checkbox);
-    li.appendChild(taskName);
+    li.appendChild(taskContent);
     li.appendChild(deleteButton);
 
     
@@ -126,9 +136,14 @@ function renderTasks() {
     completedList.appendChild(message);
   }
 
- 
+  // Update counters
   totalTasks.textContent = tasks.length;
   completedTasks.textContent = completedCount;
+
+  // Update headings
+  const pendingCount = tasks.length - completedCount;
+  document.getElementById("pendingTasksHeading").textContent = "Tasks (" + pendingCount + ")";
+  document.getElementById("completedTasksHeading").textContent = "Completed Tasks (" + completedCount + ")";
 }
 
 function toggleTask(id) {
@@ -136,9 +151,11 @@ function toggleTask(id) {
   tasks = tasks.map(function (task) {
 
     if (task.id === id) {
+      const isCompleted = !task.completed;
       return {
         ...task,
-        completed: !task.completed
+        completed: isCompleted,
+        completedAt: isCompleted ? new Date().toLocaleString() : null
       };
     }
 
