@@ -188,18 +188,17 @@ ul {
   font-style: italic;
 }
 
-/* Completed Task */
+
 
 .completed {
   text-decoration: line-through;
   color: #a0aec0;
 }
 
-/* Delete Button */
 
 .delete-btn {
   border: none;
-  background: #fc8181;
+  background: #ff3b30; /* Bright, vibrant red */
   color: white;
   padding: 8px 14px;
   border-radius: 8px;
@@ -207,11 +206,13 @@ ul {
   font-weight: 600;
   font-size: 14px;
   transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(255, 59, 48, 0.3); /* Adds a nice bright glow/shadow */
 }
 
 .delete-btn:hover {
-  background: #e53e3e;
+  background: #d70015;
   transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(215, 0, 21, 0.4);
 }
 
 /* Empty Message */
@@ -238,7 +239,7 @@ ul {
   border-color: #9ae6b4;
 }
 
-/* Mobile Responsive */
+
 
 @media (max-width: 600px) {
 
